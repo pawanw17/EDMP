@@ -3,12 +3,9 @@ from diffusion import *
 from datasets.load_test_dataset import TestDataset
 
 import argparse
-
-from autolab_core import YamlConfig
-
+import yaml
 import os
 import wandb
-
 import time
 
 if __name__=='__main__':
@@ -18,11 +15,11 @@ if __name__=='__main__':
     )
     parser.add_argument('-c', '--cfg_path', type=str, default='./benchmark/cfgs/cfg1.yaml') # access as args.cfg_path
 
-
     args = parser.parse_args() 
 
     # Load config file
-    benchmark_cfg = YamlConfig(args.cfg_path)
+    with open(args.cfg_path, "r") as fl:
+        benchmark_cfg = yaml.safe_load(fl)
 
     # Load guide params
     guides = benchmark_cfg['guide']['guides'] # list
@@ -70,7 +67,9 @@ if __name__=='__main__':
     for i in range(len(guides)):
 
         print(f"Loading Guide {guides[i]}" + "+-+-"*10)
-        g_cfg = YamlConfig(benchmark_cfg['guide']['guide_path'] + f'cfgs/guide{guides[i]}.yaml')
+
+        with open(benchmark_cfg['guide']['guide_path'] + f'cfgs/guide{guides[i]}.yaml', "r") as fl:
+            g_cfg = yaml.safe_load(fl)
         
         guide_cfgs['clearance'][i * batch_size_per_guide : (i+1) * batch_size_per_guide, :] = np.linspace(g_cfg['hyperparameters']['obstacle_clearance']['range'][0], g_cfg['hyperparameters']['obstacle_clearance']['range'][1], T)
         
