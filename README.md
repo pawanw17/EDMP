@@ -34,29 +34,24 @@ For more details and results, visit our [project page](https://ensemble-of-costs
    ```bash 
    git clone --recurse-submodules https://github.com/vishal-2000/EDMP.git
    ```
-2. Move to robofin folder and change the branch to v0.0.1
+2. Install robofin
    ```bash
    cd robofin
-   git checkout v0.0.1
-   ``` 
-3. Install robofin
-   ```bash
    pip install geometrout==0.0.3.4
-   pip install urchin
-   cd robofin
+   echo -e "from setuptools import setup\nsetup()\n" > setup.py
    pip install -e .
    ```
-4. Install other necessary packages
+3. Install other necessary packages
    ```bash
    pip install torch torchvision h5py einops autolab_core wandb scipy
    ```
-5. Download the datasets from [link](https://drive.google.com/drive/folders/1PhNjMhYHWwq9IjHTeyR2ydqEhaHxBdUW?usp=drive_link) to './datasets' folder. This would look like:
+4. Download the datasets from [link](https://drive.google.com/drive/folders/1PhNjMhYHWwq9IjHTeyR2ydqEhaHxBdUW?usp=drive_link) to './datasets' folder. This would look like:
    ```bash
    ./datasets/*_solvable_problems.pkl
    ```
    Where * is a placeholder for all the three datasets - global, hybrid, and both
-6. Download the models folder from [link](https://drive.google.com/drive/folders/10FAqqfazU35eLAs3wb_iGKcRs8e_t4gG?usp=sharing) and unzip it in the main folder. 
-7. Final directory structure must look like:
+5. Download the models folder from [link](https://drive.google.com/drive/folders/10FAqqfazU35eLAs3wb_iGKcRs8e_t4gG?usp=sharing) and unzip it in the main folder. 
+6. Final directory structure must look like:
 ```bash
 .
 ├── benchmark
